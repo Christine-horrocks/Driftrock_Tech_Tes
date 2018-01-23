@@ -14,5 +14,4 @@ describe DataManager do
     expect(subject.most_loyal).to eq('drift.rock@email.com')
   end
 
-
 end
