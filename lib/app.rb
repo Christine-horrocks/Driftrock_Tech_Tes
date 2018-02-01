@@ -1,22 +1,9 @@
 
 class DataManager
-  attr_reader :user_data
 
-  def initialize
-    @user_data = UserAPI.new.fetch_all
-    # [
-    #   { "id": "12DF-2324-GA2D-31RT", "first_name": "Drift", "last_name": "Rock",
-    #   "phone": "0-200-100-1234", "email": "drift.rock@email.com" },
-    #   { "id": "33DF-2324-GA2D-31RT", "first_name": "Glide", "last_name": "Rock",
-    #   "phone": "0-333-100-1234", "email": "glide.rock@email.com" },
-    #   ]
-
-    @purchase_data = [
-      { "user_id" => "S27G-8UMJ-LDSL-UOPN", "item" => "Huge pineapple pizza", "spend" => "19.99"},
-      { "user_id" => "12DF-2324-GA2D-31RT", "item" => "Huge pineapple pizza", "spend" => "19.99"},
-      {"user_id" => "12DF-2324-GA2D-31RT", "item" => "A nice cup of tea", "spend" => "2.99"},
-      {"user_id" => "33DF-2324-GA2D-31RT", "item" => "A nice cup of tea", "spend" => "2.99"}
-      ]
+  def initialize(api: API.new)
+    @user_data = api.fetch_all("users")
+    @purchase_data = api.fetch_all("purchases")
   end
 
   def total_spend(email)

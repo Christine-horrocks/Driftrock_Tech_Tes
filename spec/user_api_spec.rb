@@ -1,6 +1,6 @@
 require 'user_api'
 
-describe UserAPI do
+describe API do
 
   # it 'gets something back' do
   #   expect(subject.fetch_page).to_not be_empty

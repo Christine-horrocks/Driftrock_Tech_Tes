@@ -1,14 +1,14 @@
 require 'net/http'
 require 'json'
 
-class UserAPI
+class API
   attr_reader :data_packet
 
-  def fetch_all
+  def fetch_all(api_end_point)
     all = []
     curr_page = 1
     begin
-      response = fetch_page(curr_page)
+      response = fetch_page(curr_page, api_end_point)
       curr_page += 1
       all.concat(response)
     end while response.any?
@@ -17,12 +17,12 @@ class UserAPI
 
   private
 
-  def fetch_page(page)
-    clean_packet(request(page))
+  def fetch_page(page, api_end_point)
+    clean_packet(request(page, api_end_point))
   end
 
-  def request(page)
-    uri = URI("https://driftrock-dev-test-2.herokuapp.com/users?per_page=1000&page=#{page}")
+  def request(page, api_end_point)
+    uri = URI("https://driftrock-dev-test-2.herokuapp.com/#{api_end_point}?per_page=1000&page=#{page}")
     (Net::HTTP.get(uri))
   end
 
